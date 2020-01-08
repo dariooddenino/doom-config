@@ -88,13 +88,13 @@
   (setq psc-ide-use-npm-bin t)
   )
 
-;; (after! diff-hl
-;;     (global-diff-hl-mode)
-;; ;;    (diff-hl-flydiff-mode)
-;;   )
+(after! diff-hl
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
+)
 
-(global-diff-hl-mode)
-(diff-hl-flydiff-mode)
+;;(global-diff-hl-mode)
+;;(diff-hl-flydiff-mode)
 
 ;;
 ;; Appearance
