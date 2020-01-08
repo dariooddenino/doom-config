@@ -50,7 +50,7 @@
     )	
 
     (:prefix "f"
-	:desc "Search regexp occurrence in current project" :n "g" #'counsel-ag
+	:desc "Search regexp occurrence in current project" :n "g" #'counsel-rg
 	:desc "Search in copy/paste ring" :n "r" #'counsel-yank-pop
 	     )	
 ;    (:prefix "p"
@@ -72,6 +72,29 @@
 (after! psc-ide
   (setq psc-ide-use-npm-bin t))
 (eyebrowse-mode t)
+
+(after! circe
+
+  (set-irc-server! "chat.freenode.net"
+    `(:tls t
+      :port 6697
+      :nick "dario-"
+      :sasl-username "dario-"
+      :sasl-password (lambda (&rest _) (+pass-get-secret "irc/freenode.net"))
+      :channels ("#i3", "#manjaro")))
+  )
+
+(after! psc-ide
+  (setq psc-ide-use-npm-bin t)
+  )
+
+;; (after! diff-hl
+;;     (global-diff-hl-mode)
+;; ;;    (diff-hl-flydiff-mode)
+;;   )
+
+(global-diff-hl-mode)
+(diff-hl-flydiff-mode)
 
 ;;
 ;; Appearance
