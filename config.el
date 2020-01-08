@@ -27,7 +27,9 @@
       :desc "Saves the buffer" :n "s" #'save-buffer)
 
     (:prefix "g"
-      :desc "Magit" :n "g" #'magit)
+      :desc "Magit" :n "g" #'magit
+      :desc "Time machine" :n "t" #'git-timemachine
+      )
     
     (:prefix "l"
       :desc "Eyebrowse previous config" :n "<" #'eyebrowse-prev-window-config
