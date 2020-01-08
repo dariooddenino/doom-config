@@ -10,3 +10,4 @@
 (package! evil-matchit)
 (package! protobuf-mode)
 (package! eyebrowse)
+(package! git-timemachine)

@@ -88,18 +88,18 @@
   (setq psc-ide-use-npm-bin t)
   )
 
-(after! diff-hl
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
-)
+;; (after! diff-hl
+;;   (global-diff-hl-mode)
+;;   (diff-hl-flydiff-mode)
+;; )
 
-;;(global-diff-hl-mode)
-;;(diff-hl-flydiff-mode)
+(global-diff-hl-mode)
+(diff-hl-flydiff-mode)
 
 ;;
 ;; Appearance
 ;;
-(setq doom-font (font-spec :family "Fira Code Retina" :size 24)
+(setq doom-font (font-spec :family "Fira Code Retina" :size 18)
       doom-theme 'doom-moonlight
       doom-variable-pitch-font (font-spec :family "Fira Code Retina")
-      doom-big-font (font-spec :family "Fira Code Retina" :size 24))
+      doom-big-font (font-spec :family "Fira Code Retina" :size 20))
