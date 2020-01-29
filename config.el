@@ -101,7 +101,7 @@
 ;;
 ;; Appearance
 ;;
-(setq doom-font (font-spec :family "Fira Code Retina" :size 18)
-      doom-theme 'doom-moonlight
+(setq doom-font (font-spec :family "JetBrains Mono" :size 12)
+      doom-theme 'doom-challenger-deep
       doom-variable-pitch-font (font-spec :family "Fira Code Retina")
       doom-big-font (font-spec :family "Fira Code Retina" :size 20))
