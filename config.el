@@ -76,6 +76,8 @@
 	      :mode "\\.dhall'"
 	      )
 
+(add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
+
 (after! psc-ide
   (setq psc-ide-use-npm-bin t))
 (eyebrowse-mode t)
@@ -89,12 +91,12 @@
 			(if help (message "%s" help) (funcall oldfun)))))
 	)
 
-(use-package lsp-haskell
-	     :ensure t
-	     :config
-	     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-	     ;;(setq lsp-log-io t)
-	     )
+;;(use-package lsp-haskell
+;;	     :ensure t
+;;	     :config
+;;	     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+;;	     ;;(setq lsp-log-io t)
+;;	     )
 
 (after! circe
 

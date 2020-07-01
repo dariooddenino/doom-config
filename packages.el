@@ -10,6 +10,7 @@
 (package! evil-matchit)
 (package! protobuf-mode)
 (package! eyebrowse)
+(package! flycheck-haskell)
 (package! git-timemachine)
 (package! eglot)
 (package! dhall-mode)
