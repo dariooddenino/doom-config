@@ -86,14 +86,8 @@
       :channels ("#i3", "#manjaro")))
   )
 
-(after! psc-ide
-  (setq psc-ide-use-npm-bin t)
-  )
-
-;; (after! diff-hl
-;;   (global-diff-hl-mode)
-;;   (diff-hl-flydiff-mode)
-;; )
+(after! keychain-environment
+	(keychain-refresh-environment))
 
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
@@ -101,7 +95,6 @@
 ;;
 ;; Appearance
 ;;
-(setq doom-font (font-spec :family "JetBrains Mono" :size 12)
+(setq doom-font (font-spec :family "Iosevka" :size 12)
       doom-theme 'doom-challenger-deep
-      doom-variable-pitch-font (font-spec :family "Fira Code Retina")
-      doom-big-font (font-spec :family "Fira Code Retina" :size 20))
+      )
