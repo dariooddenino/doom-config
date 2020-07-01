@@ -71,9 +71,30 @@
 ;; Modules
 ;;
 
+(use-package dhall-mode
+	      :ensure t
+	      :mode "\\.dhall'"
+	      )
+
 (after! psc-ide
   (setq psc-ide-use-npm-bin t))
 (eyebrowse-mode t)
+
+(after! eglot
+	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
+	(add-hook 'php-mode-hook 'eglot-ensure)
+	(advice-add 'eglot-eldoc-function :around
+		    (lambda (oldfun)
+		      (let ((help (help-at-pt-kbd-string)))
+			(if help (message "%s" help) (funcall oldfun)))))
+	)
+
+(use-package lsp-haskell
+	     :ensure t
+	     :config
+	     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+	     ;;(setq lsp-log-io t)
+	     )
 
 (after! circe
 

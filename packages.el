@@ -11,6 +11,8 @@
 (package! protobuf-mode)
 (package! eyebrowse)
 (package! git-timemachine)
+(package! eglot)
+(package! dhall-mode)
 (package! happy-mode
   :recipe (:host github :repo "sergv/happy-mode")
   )
