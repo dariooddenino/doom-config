@@ -184,7 +184,6 @@
        :app
        ;;calendar
        irc               ; how neckbeards socialize
-       regex
        (rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
        ;write             ; emacs for writers (fiction, notes, papers, etc.)
