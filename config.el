@@ -78,6 +78,13 @@
 
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
 
+(use-package lsp-haskell
+	     :ensure t
+	     :config
+	     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+	     ;;(setq lsp-log-io t)
+	     )
+
 (after! psc-ide
   (setq psc-ide-use-npm-bin t))
 (eyebrowse-mode t)
@@ -91,12 +98,6 @@
 			(if help (message "%s" help) (funcall oldfun)))))
 	)
 
-;;(use-package lsp-haskell
-;;	     :ensure t
-;;	     :config
-;;	     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-;;	     ;;(setq lsp-log-io t)
-;;	     )
 
 (after! circe
 
@@ -118,6 +119,6 @@
 ;;
 ;; Appearance
 ;;
-(setq doom-font (font-spec :family "Iosevka" :size 12)
+(setq doom-font (font-spec :family "Iosevka" :size 14)
       doom-theme 'doom-challenger-deep
       )

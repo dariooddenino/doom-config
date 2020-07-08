@@ -18,3 +18,4 @@
   :recipe (:host github :repo "sergv/happy-mode")
   )
 (package! keychain-environment)
+(package! font-lock-studio)
