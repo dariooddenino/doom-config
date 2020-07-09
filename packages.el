@@ -59,3 +59,6 @@
 (package! dhall-mode)
 (package! keychain-environment)
 (package! font-lock-studio)
+(package! font-lock-profiler)
+(package! highlight-refontification)
+(package! faceup)
