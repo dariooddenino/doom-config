@@ -55,8 +55,8 @@
 ;; they are implemented.
 
 ;; Packages
-
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
+(add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
 
 (after! psc-ide
 	(setq psc-ide-use-npm-bin t))
@@ -89,6 +89,7 @@
 (eyebrowse-mode t)
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
+
 
 ;; Keybindings
 (map!
