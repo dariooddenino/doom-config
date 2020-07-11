@@ -62,3 +62,5 @@
 (package! font-lock-profiler)
 (package! highlight-refontification)
 (package! faceup)
+(package! package-lint)
+(package! flycheck-package)
