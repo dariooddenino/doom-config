@@ -64,4 +64,3 @@
 (package! faceup)
 (package! package-lint)
 (package! flycheck-package)
-(package! swagger-mode)
