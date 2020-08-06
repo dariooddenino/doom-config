@@ -77,13 +77,12 @@
 	      :ensure t
 	      :mode "\\.dhall")
 
-(use-package! lsp-haskell
-	      :ensure t
-	      :config
-	      (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-	      ;;(setq lsp-log-io t)
-	      )
-
+;;(use-package! lsp-haskell
+;;	      :ensure t
+;;	      :config
+;;	      (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+;;	      ;;(setq lsp-log-io t)
+;;	      )
 
 ;; TODO this should be inside an after! ?
 (eyebrowse-mode t)
@@ -151,8 +150,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (lsp-haskell dhall-mode)))
- '(safe-local-variable-values (quote ((dante-target . "blue-moon:lib")))))
+ '(package-selected-packages '(lsp-haskell dhall-mode))
+ '(safe-local-variable-values
+   '((magit-todos-exclude-globs "*booking-form/dist/main.js")
+     (dante-target . "blue-moon:lib"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
