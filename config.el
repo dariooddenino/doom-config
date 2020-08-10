@@ -70,6 +70,10 @@
 			(if help (message "%s" help) (funcall oldfun)))))
 	)
 
+(after! css-mode
+	(setq css-indent-offset 2)
+	)
+
 (after! keychain-environment
 	(keychain-refresh-environment))
 
