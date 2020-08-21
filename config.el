@@ -26,11 +26,17 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-gruvbox-light)
+(setq doom-theme 'doom-manegarm)
+; doom-rouge
+; doom-dark+
+; manegarm
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+
+;; Add closed timestamp to org todos
+(setq org-log-done t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -81,6 +87,7 @@
 	      :ensure t
 	      :mode "\\.dhall")
 
+(setq haskell-process-type 'cabal-new-repl)
 ;;(use-package! lsp-haskell
 ;;	      :ensure t
 ;;	      :config
