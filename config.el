@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-manegarm)
+(setq doom-theme 'doom-material)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -90,6 +90,27 @@
 (use-package! dhall-mode
 	      :ensure t
 	      :mode "\\.dhall")
+
+(use-package! pest-mode
+        :ensure t
+        :mode "\\.pest\\'"
+        :hook (pest-mode . flymake-mode)
+ )
+
+(use-package! org-roam-server
+ :ensure t
+ :config
+(setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8085
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
 
 (setq haskell-process-type 'cabal-new-repl)
 ;;(use-package! lsp-haskell

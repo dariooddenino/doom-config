@@ -151,6 +151,7 @@
 	+brain
 	+journal
 	+pomodoro
+  +roam
 	 )
        (php               ; perl's insecure younger brother
         +lsp)
