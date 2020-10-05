@@ -21,21 +21,26 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Iosevka" :size 14))
+(setq doom-font (font-spec :family "Hack" :size 15))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-gruvbox-light)
+(setq doom-theme 'doom-material)
+; doom-rouge
+; doom-dark+
+; manegarm
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; Add closed timestamp to org todos
+(setq org-log-done t)
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -57,6 +62,11 @@
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
 (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
+(add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
+
+(after! highlight-indent-guides
+  (setq highlight-indent-guides-method 'bitmap)
+ )
 
 (after! psc-ide
 	(setq psc-ide-use-npm-bin t))
@@ -70,6 +80,10 @@
 			(if help (message "%s" help) (funcall oldfun)))))
 	)
 
+(after! css-mode
+	(setq css-indent-offset 2)
+	)
+
 (after! keychain-environment
 	(keychain-refresh-environment))
 
@@ -77,6 +91,28 @@
 	      :ensure t
 	      :mode "\\.dhall")
 
+(use-package! pest-mode
+        :ensure t
+        :mode "\\.pest\\'"
+        :hook (pest-mode . flymake-mode)
+ )
+
+(use-package! org-roam-server
+ :ensure t
+ :config
+(setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8085
+        org-roam-server-authenticate nil
+        org-roam-server-export-inline-images t
+        org-roam-server-serve-files nil
+        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+        org-roam-server-network-poll t
+        org-roam-server-network-arrows nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20))
+
+(setq haskell-process-type 'cabal-new-repl)
 ;;(use-package! lsp-haskell
 ;;	      :ensure t
 ;;	      :config

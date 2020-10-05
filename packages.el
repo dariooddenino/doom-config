@@ -64,3 +64,6 @@
 (package! faceup)
 (package! package-lint)
 (package! flycheck-package)
+(package! highlight-indent-guides)
+(package! org-roam-server)
+(package! pest-mode)
