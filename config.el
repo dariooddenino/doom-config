@@ -113,12 +113,7 @@
         org-roam-server-network-label-wrap-length 20))
 
 (setq haskell-process-type 'cabal-new-repl)
-(use-package! lsp-haskell
-	      :ensure t
-        :config
-	      (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
-;;	      ;;(setq lsp-log-io t)
-	      )
+
 (setq read-process-output-max (* 1024 1024))
 
 ;; TODO this should be inside an after! ?
