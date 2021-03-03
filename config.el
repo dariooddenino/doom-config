@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-material)
+(setq doom-theme 'doom-homage-white)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -97,6 +97,9 @@
         :hook (pest-mode . flymake-mode)
  )
 
+(use-package! direnv
+	      :config (direnv-mode))
+
 (use-package! org-roam-server
  :ensure t
  :config
@@ -128,7 +131,18 @@
   "C-f" 'ivy-toggle-calling
   )
 
+(defun append-line-comment-block ()
+  "Appends a new line after a comment block without expanding it.
+Calls `evil-append-line` and `+default/newline` in sequence."
+  (interactive)
+  (call-interactively 'evil-append-line)
+  (call-interactively '+default/newline)
+  )
+
 (map!
+  (:prefix "g"
+    :desc "New line after comment block" :n "o" #'append-line-comment-block
+   )
   (:leader
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
@@ -148,7 +162,8 @@
 
 	(:prefix "g"
 		 :desc "Magit" :n "g" #'magit
-		 :desc "Time machine" :n "t" #'git-timemachine)
+		 :desc "Time machine" :n "t" #'git-timemachine
+     )
 
 	(:prefix "l"
 	        :desc "Eyebrowse previous config" :n "<" #'eyebrowse-prev-window-config

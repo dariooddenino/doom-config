@@ -7,7 +7,15 @@
    '("~/org/tasks.org" "~/org-basics.org" "/home/dario/org/todo.org"))
  '(package-selected-packages '(lsp-haskell dhall-mode))
  '(safe-local-variable-values
-   '((magit-todos-exclude-globs "*booking-form/dist/main.js")
+   '((flycheck-disabled-checkers haskell-stack-ghc)
+     (flycheck-disabled-checkers
+      (haskell-stack-ghc))
+     (add-to-list 'flycheck-disabled-checkers 'haskell-stack-ghc)
+     (haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4)
+     (haskell-process-type . ghci)
+     (dante-repl-command-line "ghci")
+     (magit-todos-exclude-globs "*booking-form/dist/main.js")
      (dante-target . "blue-moon:lib"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

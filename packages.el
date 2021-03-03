@@ -67,3 +67,4 @@
 (package! highlight-indent-guides)
 (package! org-roam-server)
 (package! pest-mode)
+(package! direnv)
