@@ -21,12 +21,12 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Hack" :size 15))
+(setq doom-font (font-spec :family "Hack" :size 17))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-homage-white)
+(setq doom-theme 'doom-old-hope)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -124,6 +124,7 @@
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
+(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
 
 ;; Keybindings
 (map!
@@ -146,7 +147,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:leader
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
-		 :desc "Stylish Haskell" :n "," #'haskell-mode-stylish-buffer
+		 :desc "Format buffer" :n "," #'format-all-buffer
 		 :desc "Comment line" :n "/" #'comment-line
 		 :desc "Comment region" :n ";" #'comment-region)
 
