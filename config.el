@@ -58,6 +58,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(add-to-list 'load-path "~/.config/doom")
+(require 'load-nano)
 
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
@@ -68,8 +70,12 @@
   (setq highlight-indent-guides-method 'bitmap)
  )
 
-(after! psc-ide
-	(setq psc-ide-use-npm-bin t))
+;(after! psc-ide
+;	(setq psc-ide-use-npm-bin t))
+
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 4 (* 1024 1024)))
+(setq lsp-idle-delay 0.500)
 
 (after! eglot
 	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
@@ -88,11 +94,9 @@
 	(keychain-refresh-environment))
 
 (use-package! dhall-mode
-	      :ensure t
 	      :mode "\\.dhall")
 
 (use-package! pest-mode
-        :ensure t
         :mode "\\.pest\\'"
         :hook (pest-mode . flymake-mode)
  )
@@ -100,8 +104,23 @@
 (use-package! direnv
 	      :config (direnv-mode))
 
+(after! lsp-mode
+(dolist (dir '(
+               "[/\\\\].spago"
+               "[/\\\\].sass-cache"
+               "[/\\\\].cache"
+               "[/\\\\]purescript/output$" ;; these below are bm related...
+               "[/\\\\]purescript/src$"
+               "[/\\\\]purescript/node_modules"
+               "[/\\\\]purescript"
+               "[/\\\\]uploads$"
+               "[/\\\\]sass$"
+               "[/\\\\]static$"
+                 ))
+  (push dir lsp-file-watch-ignored)))
+
+
 (use-package! org-roam-server
- :ensure t
  :config
 (setq org-roam-server-host "127.0.0.1"
         org-roam-server-port 8085
