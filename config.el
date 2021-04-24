@@ -119,6 +119,8 @@
                  ))
   (push dir lsp-file-watch-ignored)))
 
+(after! js2-mode
+  (setq js2-basic-offset 2))
 
 (use-package! org-roam-server
  :config
@@ -143,7 +145,7 @@
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
+;;(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
 
 ;; Keybindings
 (map!
