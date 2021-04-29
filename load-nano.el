@@ -1,6 +1,6 @@
 ;;; load-nano.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'nil)
+;; (setq doom-theme 'nil)
 
 (add-to-list 'load-path "~/dev/vendor/nano-emacs")
 (require 'nano-base-colors)

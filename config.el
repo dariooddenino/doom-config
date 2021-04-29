@@ -145,13 +145,7 @@
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-;;(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
-
-;; Keybindings
-(map!
-  :map ivy-minibuffer-map
-  "C-f" 'ivy-toggle-calling
-  )
+(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
 
 (defun append-line-comment-block ()
   "Appends a new line after a comment block without expanding it.
@@ -161,6 +155,12 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (call-interactively '+default/newline)
   )
 
+;; Keybindings
+(map!
+  :map ivy-minibuffer-map
+  "C-f" 'ivy-toggle-calling
+  )
+
 (map!
   (:prefix "g"
     :desc "New line after comment block" :n "o" #'append-line-comment-block
@@ -168,6 +168,8 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:leader
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
+     ;; temporary solution
+     :desc "Stylish buffer" :n "." #'haskell-mode-stylish-buffer
 		 :desc "Format buffer" :n "," #'format-all-buffer
 		 :desc "Comment line" :n "/" #'comment-line
 		 :desc "Comment region" :n ";" #'comment-region)
