@@ -58,8 +58,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(add-to-list 'load-path "~/.config/doom")
-(require 'load-nano)
+;;(add-to-list 'load-path "~/.config/doom")
+;;(require 'load-nano)
 
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
@@ -109,13 +109,15 @@
                "[/\\\\].spago"
                "[/\\\\].sass-cache"
                "[/\\\\].cache"
-               "[/\\\\]purescript/output$" ;; these below are bm related...
-               "[/\\\\]purescript/src$"
-               "[/\\\\]purescript/node_modules"
-               "[/\\\\]purescript"
+               "[/\\\\].hie"
+               "[/\\\\].stack-work"
+               "[/\\\\].circleci"
+               "[/\\\\]node_modules"
                "[/\\\\]uploads$"
                "[/\\\\]sass$"
                "[/\\\\]static$"
+               "[/\\\\]output$" ;; these below are bm related...
+               "[/\\\\]dce-output$" ;; these below are bm related...
                  ))
   (push dir lsp-file-watch-ignored)))
 
