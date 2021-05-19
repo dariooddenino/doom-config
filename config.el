@@ -66,6 +66,9 @@
 (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
 (add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
 
+(add-to-list '+lookup-provider-url-alist '("Pursuit" "https://pursuit.purescript.org/search?q=%s"))
+(add-to-list '+lookup-provider-url-alist '("Stackage" "https://www.stackage.org/lts-16.31/hoogle?q=%s"))
+
 (after! highlight-indent-guides
   (setq highlight-indent-guides-method 'bitmap)
  )
@@ -181,10 +184,10 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 		 :desc "Flycheck prev error" :n "p" #'flycheck-previous-error
 		 :desc "Flycheck list errors" :n "l" #'flycheck-list-errors)
 
-	(:prefix "f"
-		 :desc "Search regexp occurrence in current project" :n "g" #'counsel-rg
-		 :desc "Searc in copy/paste ring" :n "r" #'counsel-yank-pop
-		 :desc "Saves the buffer" :n "s" #'save-buffer)
+;	(:prefix "f"
+;		 :desc "Search regexp occurrence in current project" :n "g" #'counsel-rg
+;		 :desc "Searc in copy/paste ring" :n "r" #'counsel-yank-pop
+;		 :desc "Saves the buffer" :n "s" #'save-buffer)
 
 	(:prefix "g"
 		 :desc "Magit" :n "g" #'magit
