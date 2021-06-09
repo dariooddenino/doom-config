@@ -107,6 +107,8 @@
 (use-package! direnv
 	      :config (direnv-mode))
 
+(global-activity-watch-mode)
+
 (after! lsp-mode
 (dolist (dir '(
                "[/\\\\].spago"
@@ -116,11 +118,14 @@
                "[/\\\\].stack-work"
                "[/\\\\].circleci"
                "[/\\\\]node_modules"
-               "[/\\\\]uploads$"
+               "[/\\\\]uploads"
                "[/\\\\]sass$"
                "[/\\\\]static$"
                "[/\\\\]output$" ;; these below are bm related...
                "[/\\\\]dce-output$" ;; these below are bm related...
+               "[/\\\\]generated$" ;; wp stuff
+               "[/\\\\]docker" ;;
+               "[/\\\\]vendor" ;;
                  ))
   (push dir lsp-file-watch-ignored)))
 
@@ -130,7 +135,7 @@
 (use-package! org-roam-server
  :config
 (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8085
+        org-roam-server-port 8088
         org-roam-server-authenticate nil
         org-roam-server-export-inline-images t
         org-roam-server-serve-files nil
@@ -180,6 +185,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 		 :desc "Comment region" :n ";" #'comment-region)
 
 	(:prefix "e"
+     :desc "helm lsp errors" :n "a" #'helm-lsp-diagnostics
 		 :desc "Flycheck next error" :n "n" #'flycheck-next-error
 		 :desc "Flycheck prev error" :n "p" #'flycheck-previous-error
 		 :desc "Flycheck list errors" :n "l" #'flycheck-list-errors)

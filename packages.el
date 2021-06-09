@@ -68,3 +68,4 @@
 (package! org-roam-server)
 (package! pest-mode)
 (package! direnv)
+(package! activity-watch-mode)
