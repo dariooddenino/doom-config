@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: Halogen Component
+# key: /h
+# --
+
+module $1 where
+
+import Prelude
+import Effect.Aff (Aff)
+import Halogen as H
+import Halogen.HTML as HH
+
+type Input =
+  ${2:Unit}
+
+type State =
+  ${3:Unit}
+
+data Action
+  = $4
+
+data Message
+  = ${5:Void}
+
+data Query
+  = ${6:Unit}
+
+type ChildSlots
+  = (${7:()})
+
+component :: H.Component Query Input Message Aff
+component =
+  H.mkComponent
+    { initialState
+    , render
+    ${8:, eval: H.mkEval $ H.defaultEval { handleAction = handleAction }}
+    }
+
+initialState :: Input -> State
+initialState i =
+  $8
+
+render :: State -> H.ComponentHTML Action ChildSlots Aff
+render s =
+  HH.div_ []
+
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction = case _ of
+  $0
