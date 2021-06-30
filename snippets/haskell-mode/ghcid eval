@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ghcid eval
+# key:  /ge
+# --
+
+{- \$>
+$0
+<$ -}

@@ -61,6 +61,25 @@
 ;;(add-to-list 'load-path "~/.config/doom")
 ;;(require 'load-nano)
 
+(add-to-list 'load-path "~/.config/doom")
+(require 'ghcid)
+
+(defun ghcid2 ()
+  "Runs ghcid in a `term' buffer."
+  (interactive)
+  (require 'term)
+  (let* ((cmd "ghcid")
+         (h (- (window-height) scroll-margin 3))
+         (term-buffer-maximum-size h)
+         (args (format "-h %d" h))
+         (switches (split-string-and-unquote args))
+         (termbuf (apply 'make-term "ghcid" cmd nil switches)))^
+    (set-buffer termbuf)
+    (term-mode)
+    (term-char-mode)
+    (compilation-minor-mode)
+    (switch-to-buffer termbuf)))
+
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
 (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
