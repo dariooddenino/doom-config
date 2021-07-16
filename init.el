@@ -21,16 +21,16 @@
        :completion
        (company           ; the ultimate code completion backend
         +childframe)
-       (helm              ; the *other* search engine for love and life
-        +fuzzy
-        +childframe
-        +icons)
-       ;;ido               ; the other *other* search engine...
-       ;(ivy               ; a search engine for love and life
+       ;(helm              ; the *other* search engine for love and life
        ; +fuzzy
-       ; +prescient
-       ; +childrame
+       ; +childframe
        ; +icons)
+       ;;ido               ; the other *other* search engine...
+       (ivy               ; a search engine for love and life
+        +fuzzy
+        +prescient
+        +childrame
+        +icons)
 
        :ui
        deft              ; notational velocity for Emacs
@@ -134,7 +134,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       (haskell)  ; a language that's lazier than I am
+       (haskell +lsp)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;json              ; At least it ain't XML

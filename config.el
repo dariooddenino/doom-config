@@ -82,11 +82,11 @@
 (set-company-backend! 'haskell-mode-hook '(company-tabnine company-capf company-yasnippet))
 
 (after! company
-  (setq +lsp-company-backends '(company-tabnine company-capf company-yasnippet))
+  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
 ;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
   ; (add-to-list 'company-backends 'company-tabnine)
   (setq company-show-numbers t)
-  (setq company-idle-delay 0.4)
+  (setq company-idle-delay 0)
 )
 
 (setq gc-cons-threshold 100000000)
@@ -245,7 +245,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(lsp-haskell dhall-mode))
+ '(package-selected-packages '(dhall-mode))
  '(safe-local-variable-values
    '((magit-todos-exclude-globs "*booking-form/dist/main.js")
      (dante-target . "blue-moon:lib"))))
