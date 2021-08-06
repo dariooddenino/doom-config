@@ -65,7 +65,7 @@
 (package! package-lint)
 (package! flycheck-package)
 (package! highlight-indent-guides)
-(package! org-roam-server)
+;(package! org-roam-server)
 (package! pest-mode)
 (package! direnv)
 (package! activity-watch-mode)

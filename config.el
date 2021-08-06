@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-old-hope)
+(setq doom-theme 'doom-one-light)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -37,6 +37,64 @@
 
 ;; Add closed timestamp to org todos
 (setq org-log-done t)
+
+;; Org config
+;; Hide emphasis markers
+(setq org-hide-emphasis-markers t)
+;; Replaces lists - with dots
+;(font-lock-add-keywords 'org-mode
+;                          '(("^ *\\([-]\\) "
+;                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+;; Sets org mode fonts
+(let* ((variable-tuple
+          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (base-font-color     (face-foreground 'default nil 'default))
+         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline ,@variable-tuple))))
+     `(org-level-7 ((t (,@headline ,@variable-tuple))))
+     `(org-level-6 ((t (,@headline ,@variable-tuple))))
+     `(org-level-5 ((t (,@headline ,@variable-tuple))))
+     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+
+;; Sets variable pitch font face
+(custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "ETBembo" :height 180 :weight thin))))
+   '(fixed-pitch ((t ( :family "Fira Code Retina" :height 160)))))
+
+;; Enable variable pitch mode for og
+;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+;; Adapts line lengths to window width
+(add-hook 'org-mode-hook 'visual-line-mode)
+;; Use different fonts for different org sections
+(custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:foreground "royal blue" :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+
+;; END ORG CONFIG
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -79,7 +137,7 @@
 ;(after! psc-ide
 ;	(setq psc-ide-use-npm-bin t))
 
-(set-company-backend! 'haskell-mode-hook '(company-tabnine company-capf company-yasnippet))
+(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-capf company-yasnippet))
 
 (after! company
   (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
@@ -89,7 +147,7 @@
   (setq company-idle-delay 0)
 )
 
-(setq gc-cons-threshold 100000000)
+;; (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 4 (* 1024 1024)))
 (setq lsp-idle-delay 0.500)
 
@@ -145,19 +203,19 @@
 (after! js2-mode
   (setq js2-basic-offset 2))
 
-(use-package! org-roam-server
- :config
-(setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8088
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+;(use-package! org-roam-server
+; :config
+;(setq org-roam-server-host "127.0.0.1"
+;        org-roam-server-port 8088
+;        org-roam-server-authenticate nil
+;        org-roam-server-export-inline-images t
+;        org-roam-server-serve-files nil
+;        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+;        org-roam-server-network-poll t
+;        org-roam-server-network-arrows nil
+;        org-roam-server-network-label-truncate t
+;        org-roam-server-network-label-truncate-length 60
+;        org-roam-server-network-label-wrap-length 20))
 
 (setq haskell-process-type 'cabal-new-repl)
 

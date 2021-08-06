@@ -155,7 +155,8 @@
 	+brain
 	+journal
 	+pomodoro
-  +roam
+	+roam2
+	+pretty
 	 )
        (php               ; perl's insecure younger brother
         +lsp)
@@ -186,7 +187,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
+       calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
