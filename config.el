@@ -46,7 +46,8 @@
 ;                          '(("^ *\\([-]\\) "
 ;                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 ;; Sets org mode fonts
-(let* ((variable-tuple
+(after! org-mode
+  (let* ((variable-tuple
           (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
                 ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
                 ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
@@ -67,6 +68,7 @@
      `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
      `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
      `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+)
 
 ;; Sets variable pitch font face
 (custom-theme-set-faces
