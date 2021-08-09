@@ -103,11 +103,6 @@
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
-(after! org-agenda
-	(setq org-agenda-files (append org-agenda-files '("~/org/gdt.org"
-							    "~/org/someday.org"
-							    "~/org/tickler.org"))))
-
 ;; END ORG CONFIG
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
