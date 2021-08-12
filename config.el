@@ -103,6 +103,17 @@
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
+(use-package! websocket :after org-roam)
+(use-package! org-roam-ui
+	      :after org-roam
+	      ;; This should be hooked to something else to improve startup time
+	      :hook (after-init . org-roam-ui-mode)
+	      :config
+	      (setq org-roam-ui-sync-theme t
+		    org-roam-ui-follow t
+		    org-roam-ui-update-on-save t
+		    org-roam-ui-open-on-start t))
+
 ;; END ORG CONFIG
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
