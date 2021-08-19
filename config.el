@@ -154,9 +154,7 @@
   (setq highlight-indent-guides-method 'bitmap)
  )
 
-;(after! psc-ide
-;	(setq psc-ide-use-npm-bin t))
-
+(set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
 (set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-capf company-yasnippet))
 
 (after! company
