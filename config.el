@@ -155,15 +155,14 @@
  )
 
 (set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
-(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-capf company-yasnippet))
+;(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-capf company-yasnippet))
 
-(after! company
-  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
+;(after! company
+;  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
 ;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
-  ; (add-to-list 'company-backends 'company-tabnine)
-  (setq company-show-numbers t)
-  (setq company-idle-delay 0)
-)
+;  (setq company-show-numbers t)
+;  (setq company-idle-delay 0)
+;)
 
 ;; (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 4 (* 1024 1024)))
