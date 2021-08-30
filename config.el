@@ -184,6 +184,9 @@
 (after! keychain-environment
 	(keychain-refresh-environment))
 
+(use-package! svelte-mode :mode "\\.svelte"
+	      :hook #'lsp)
+
 (use-package! dhall-mode
 	      :mode "\\.dhall")
 
@@ -238,8 +241,6 @@
 
 (setq read-process-output-max (* 1024 1024))
 
-;; TODO this should be inside an after! ?
-(eyebrowse-mode t)
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
@@ -288,24 +289,6 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 		 :desc "Time machine" :n "t" #'git-timemachine
      )
 
-	(:prefix "l"
-	        :desc "Eyebrowse previous config" :n "<" #'eyebrowse-prev-window-config
-	        :desc "Eyebrowse next config" :n ">" #'eyebrowse-next-window-config
-	        :desc "Eyebrowse last config" :n "'" #'eyebrowse-last-window-config
-	        :desc "Eyebrowse close config" :n "\"" #'eyebrowse-close-window-config
-	        :desc "Eyebrwose switch to" :n "." #'eyebrowse-switch-to-window-config
-	        :desc "Eyebrowse rename" :n "," #'eyebrowse-rename-window-config
-	        :desc "Eyebrowse create" :n "c" #'eyebrowse-create-window-config
-	        :desc "Eyebrowse config -2" :n "0" #'eyebrowse-switch-to-window-config-0
-	        :desc "Eyebrowse config -1" :n "1" #'eyebrowse-switch-to-window-config-1
-	        :desc "Eyebrowse config 0" :n "2" #'eyebrowse-switch-to-window-config-2
-	        :desc "Eyebrowse config 1" :n "3" #'eyebrowse-switch-to-window-config-3
-	        :desc "Eyebrowse config 2" :n "4" #'eyebrowse-switch-to-window-config-4
-	        :desc "Eyebrowse config 3" :n "5" #'eyebrowse-switch-to-window-config-5
-	        :desc "Eyebrowse config 4" :n "6" #'eyebrowse-switch-to-window-config-6
-	        :desc "Eyebrowse config 5" :n "7" #'eyebrowse-switch-to-window-config-7
-	        :desc "Eyebrowse config 6" :n "8" #'eyebrowse-switch-to-window-config-8
-	        :desc "Eyebrowse config 7" :n "9" #'eyebrowse-switch-to-window-config-9)
 
 	(:prefix "s"
 		 :desc "Clears the search highlights" :n "c" #'evil-ex-nohighlight)
