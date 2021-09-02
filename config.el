@@ -116,6 +116,20 @@
 
 ;; END ORG CONFIG
 
+(defhydra doom-window-resize-hydra (:hint nil)
+  "
+             _k_ increase height
+_h_ decrease width    _l_ increase width
+             _j_ decrease height
+"
+  ("h" evil-window-decrease-width)
+  ("j" evil-window-increase-height)
+  ("k" evil-window-decrease-height)
+  ("l" evil-window-increase-width)
+
+  ("q" nil))
+
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -294,7 +308,8 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 		 :desc "Clears the search highlights" :n "c" #'evil-ex-nohighlight)
 
 	(:prefix "w"
-		 :desc "Deletes other windows" :n "a" #'delete-other-windows)
+		 :desc "Deletes other windows" :n "a" #'delete-other-windows
+     :desc "Hydra resize" :n "SPC" #'doom-window-resize-hydra/body)
 
     ))
 
