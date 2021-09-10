@@ -114,6 +114,10 @@
 		    org-roam-ui-update-on-save t
 		    org-roam-ui-open-on-start t))
 
+(setq org-roam-dailies-capture-templates
+  '(("d" "default" entry "* %<%H:%M >: %?"
+      :if-new (file+head "%<Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+
 ;; END ORG CONFIG
 
 (defhydra doom-window-resize-hydra (:hint nil)
@@ -178,9 +182,32 @@ _h_ decrease width    _l_ increase width
 ;  (setq company-idle-delay 0)
 ;)
 
-;; (setq gc-cons-threshold 100000000)
+;; === LSP CONFIG ===
+; (with-eval-after-load 'lsp-mode
+  ;; no real time syntax check 
+  ; (setq lsp-diagnostic-package :none)
+  ;; handle yasnippet by myself
+  ; (setq lsp-enable-snippet nil)
+  ;; use `company-ctags' only.
+  ;; Please note `company-lsp' is automatically enabled if installed
+  ; (setq lsp-enable-completion-at-point nil)
+  ;; turn off for better performance
+  ; (setq lsp-enable-symbol-highlighting nil)
+  ; (setq lsp-enable-links nil)
+
+  ;; don't ping LSP language server too frequently
+  ; (defvar lsp-on-touch-time 0)
+  ; (defadvice lsp-on-change (around lsp-on-change-hack activate)
+  ;  ;; dont' run `lsp-on-change' too frequently
+  ;  (when (> (- (float-time (current-time))
+  ;            lsp-on-touch-time) 30) ;; 30 seconds
+  ;   (setq lsp-on-touch-time (float-time (current-time)))
+  ;   ad-do-it))
+  ; )
+
 (setq read-process-output-max (* 4 (* 1024 1024)))
-(setq lsp-idle-delay 0.500)
+(setq lsp-idle-delay 0.200)
+(setq company-minimum-prefix-length 3)
 
 (after! eglot
 	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
