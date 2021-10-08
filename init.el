@@ -40,8 +40,8 @@
        fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra
-       ;;indent-guides     ; highlighted indent columns
-       ;;minimap           ; show a map of the code on the side
+       indent-guides     ; highlighted indent columns
+       ;; minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -101,7 +101,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       lsp
+       (lsp +peek)
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
@@ -152,17 +152,17 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org               ; organize your plain life in plain text
-	+brain
-	+journal
-	+pomodoro
-	+roam2
-	+pretty
-	+hugo
+	;+brain
+	;+journal
+	;+pomodoro
+	;+roam2
+	;+pretty
+	;+hugo
 	 )
        (php               ; perl's insecure younger brother
         +lsp)
        ;;plantuml          ; diagrams for confusing people more
-       (purescript)         ; javascript, but functional
+       (purescript +lsp)         ; javascript, but functional
        ;;python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs

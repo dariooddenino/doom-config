@@ -21,12 +21,12 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Hack" :size 17))
+(setq doom-font (font-spec :family "Iosevka" :size 15))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-one)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -34,91 +34,8 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
 ;; Add closed timestamp to org todos
 (setq org-log-done t)
-
-;; Org config
-;; Hide emphasis markers
-(setq org-hide-emphasis-markers t)
-;; Replaces lists - with dots
-;(font-lock-add-keywords 'org-mode
-;                          '(("^ *\\([-]\\) "
-;                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-;; Sets org mode fonts
-(defun org-mode-set-fonts ()
-  (let* ((variable-tuple
-          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-         (base-font-color     (face-foreground 'default nil 'default))
-         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
-
-    (custom-theme-set-faces
-     'user
-     `(org-level-8 ((t (,@headline ,@variable-tuple))))
-     `(org-level-7 ((t (,@headline ,@variable-tuple))))
-     `(org-level-6 ((t (,@headline ,@variable-tuple))))
-     `(org-level-5 ((t (,@headline ,@variable-tuple))))
-     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
-     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
-     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
-  )
-
-(if (daemonp)
-  (add-hook 'after-make-frame-functions
-	    (lambda (frame)
-	      (select-frame frame)
-	      (org-mode-set-fonts)))
-  (org-mode-set-fonts))
-
-;; Sets variable pitch font face
-(custom-theme-set-faces
-   'user
-   '(variable-pitch ((t (:family "ETBembo" :height 180 :weight thin))))
-   '(fixed-pitch ((t ( :family "Fira Code Retina" :height 160)))))
-
-;; Enable variable pitch mode for og
-;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-;; Adapts line lengths to window width
-(add-hook 'org-mode-hook 'visual-line-mode)
-;; Use different fonts for different org sections
-(custom-theme-set-faces
-   'user
-   '(org-block ((t (:inherit fixed-pitch))))
-   '(org-code ((t (:inherit (shadow fixed-pitch)))))
-   '(org-document-info ((t (:foreground "dark orange"))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-   '(org-link ((t (:foreground "royal blue" :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-property-value ((t (:inherit fixed-pitch))) t)
-   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
-   '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
-
-(use-package! websocket :after org-roam)
-(use-package! org-roam-ui
-	      :after org-roam
-	      ;; This should be hooked to something else to improve startup time
-	      :hook (after-init . org-roam-ui-mode)
-	      :config
-	      (setq org-roam-ui-sync-theme t
-		    org-roam-ui-follow t
-		    org-roam-ui-update-on-save t
-		    org-roam-ui-open-on-start t))
-
-(setq org-roam-dailies-capture-templates
-  '(("d" "default" entry "* %<%H:%M >: %?"
-      :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
-
-;; END ORG CONFIG
 
 (defhydra doom-window-resize-hydra (:hint nil)
   "
@@ -158,7 +75,7 @@ _h_ decrease width    _l_ increase width
 ;;(require 'load-nano)
 
 (add-to-list 'load-path "~/.config/doom")
-(require 'ghcid)
+;(require 'ghcid)
 
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
@@ -225,16 +142,16 @@ _h_ decrease width    _l_ increase width
 (after! keychain-environment
 	(keychain-refresh-environment))
 
-(use-package! svelte-mode :mode "\\.svelte"
-	      :hook #'lsp)
+;(use-package! svelte-mode :mode "\\.svelte"
+;	      :hook #'lsp)
 
 (use-package! dhall-mode
 	      :mode "\\.dhall")
 
-(use-package! pest-mode
-        :mode "\\.pest\\'"
-        :hook (pest-mode . flymake-mode)
- )
+;(use-package! pest-mode
+;        :mode "\\.pest\\'"
+;        :hook (pest-mode . flymake-mode)
+; )
 
 (use-package! direnv
 	      :config (direnv-mode))
@@ -294,6 +211,12 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (call-interactively 'evil-append-line)
   (call-interactively '+default/newline)
   )
+
+(after! company
+  (define-key company-active-map (kbd "<return>") nil)
+  (define-key company-active-map (kbd "RET") nil)
+  (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
+ )
 
 ;; Keybindings
 (map!
