@@ -79,7 +79,7 @@ _h_ decrease width    _l_ increase width
 
 ;; Packages
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
-(add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
+; (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
 (add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
 
 (add-to-list '+lookup-provider-url-alist '("Pursuit" "https://pursuit.purescript.org/search?q=%s"))
