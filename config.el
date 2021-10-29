@@ -90,14 +90,18 @@ _h_ decrease width    _l_ increase width
  )
 
 (set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
-;(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-capf company-yasnippet))
 
-;(after! company
-;  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
-;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
-;  (setq company-show-numbers t)
-;  (setq company-idle-delay 0)
-;)
+(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
+(after! psc-ide
+(set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
+ )
+
+(after! company
+  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
+  (setq company-backends '(company-tabnine company-capf company-yasnippet))
+  (setq company-show-numbers t)
+  (setq company-idle-delay 0)
+)
 
 ;; === LSP CONFIG ===
 ; (with-eval-after-load 'lsp-mode
@@ -147,6 +151,10 @@ _h_ decrease width    _l_ increase width
 
 (use-package! dhall-mode
 	      :mode "\\.dhall")
+
+;(setq auth-sources '("~/.authinfo.gpg"))
+(use-package! forge
+  :after magit)
 
 ;(use-package! pest-mode
 ;        :mode "\\.pest\\'"
