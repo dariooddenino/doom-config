@@ -149,6 +149,9 @@ _h_ decrease width    _l_ increase width
 ;(use-package! svelte-mode :mode "\\.svelte"
 ;	      :hook #'lsp)
 
+(setq nimsuggest-path "/home/dario/.nimble/bin/nimsuggest")
+
+
 (use-package! dhall-mode
 	      :mode "\\.dhall")
 
@@ -189,6 +192,10 @@ _h_ decrease width    _l_ increase width
 (after! js2-mode
   (setq js2-basic-offset 2))
 
+(after! haskell-mode
+  (setq lsp-haskell-importlens-on nil)
+ )
+
 ;(use-package! org-roam-server
 ; :config
 ;(setq org-roam-server-host "127.0.0.1"
@@ -227,10 +234,10 @@ Calls `evil-append-line` and `+default/newline` in sequence."
  )
 
 ;; Keybindings
-(map!
-  :map ivy-minibuffer-map
-  "C-f" 'ivy-toggle-calling
-  )
+;(map!
+;  :map ivy-minibuffer-map
+;  "C-f" 'ivy-toggle-calling
+;  )
 
 (map!
   (:prefix "g"
@@ -270,6 +277,10 @@ Calls `evil-append-line` and `+default/newline` in sequence."
      :desc "Hydra resize" :n "SPC" #'doom-window-resize-hydra/body)
 
     ))
+
+;; manually expand path
+(setenv "PATH" (concat (getenv "PATH") ":/home/dario/.nimble/bin"))
+(setq exec-path (append exec-path '("/home/dario/.nimble/bin")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

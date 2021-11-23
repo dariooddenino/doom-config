@@ -26,11 +26,12 @@
        ; +childframe
        ; +icons)
        ;;ido               ; the other *other* search engine...
-       (ivy               ; a search engine for love and life
-        +fuzzy
-        +prescient
-        +childrame
-        +icons)
+       ;(ivy               ; a search engine for love and life
+       ; +fuzzy
+       ; +prescient
+       ; +childrame
+       ; +icons)
+       vertico
 
        :ui
        deft              ; notational velocity for Emacs
@@ -148,7 +149,7 @@
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       ;; nim               ; python + lisp at the speed of c
+       nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org               ; organize your plain life in plain text
