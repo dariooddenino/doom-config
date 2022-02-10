@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-fairy-floss)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -146,10 +146,10 @@ _h_ decrease width    _l_ increase width
 (after! keychain-environment
 	(keychain-refresh-environment))
 
-;(use-package! svelte-mode :mode "\\.svelte"
-;	      :hook #'lsp)
+(use-package! svelte-mode :mode "\\.svelte"
+	      :hook #'lsp)
 
-(setq nimsuggest-path "/home/dario/.nimble/bin/nimsuggest")
+;; (setq nimsuggest-path "/home/dario/.nimble/bin/nimsuggest")
 
 
 (use-package! dhall-mode
@@ -244,6 +244,9 @@ Calls `evil-append-line` and `+default/newline` in sequence."
     :desc "New line after comment block" :n "o" #'append-line-comment-block
    )
   (:leader
+  (:prefix "c"
+    :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
+   )
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
      ;; temporary solution
@@ -270,7 +273,9 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 
 
 	(:prefix "s"
-		 :desc "Clears the search highlights" :n "c" #'evil-ex-nohighlight)
+		 :desc "Clears the search highlights" :n "c" #'evil-ex-nohighlight
+     :
+     )
 
 	(:prefix "w"
 		 :desc "Deletes other windows" :n "a" #'delete-other-windows
@@ -279,8 +284,8 @@ Calls `evil-append-line` and `+default/newline` in sequence."
     ))
 
 ;; manually expand path
-(setenv "PATH" (concat (getenv "PATH") ":/home/dario/.nimble/bin"))
-(setq exec-path (append exec-path '("/home/dario/.nimble/bin")))
+;;(setenv "PATH" (concat (getenv "PATH") ":/home/dario/.nimble/bin"))
+;;(setq exec-path (append exec-path '("/home/dario/.nimble/bin")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -7,7 +7,8 @@
    '("~/org/gtd.org" "~/org/someday.org" "~/org/tickler.org" "~/org/tasks.org" "~/org-basics.org" "/home/dario/org/todo.org" "~/org/roam"))
  '(package-selected-packages '(lsp-haskell dhall-mode))
  '(safe-local-variable-values
-   '((flycheck-disabled-checkers haskell-stack-ghc)
+   '((psc-ide-output-directory . "psc-ide-output")
+     (flycheck-disabled-checkers haskell-stack-ghc)
      (flycheck-disabled-checkers
       (haskell-stack-ghc))
      (add-to-list 'flycheck-disabled-checkers 'haskell-stack-ghc)
