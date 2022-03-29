@@ -233,11 +233,11 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
  )
 
-;; Keybindings
-;(map!
-;  :map ivy-minibuffer-map
-;  "C-f" 'ivy-toggle-calling
-;  )
+(defun update-ghci ()
+  "Updates the ghci session reloading the files and running DevelMain.update."
+  (interactive)
+  (+tmux "send-keys C-u :serve Enter")
+  )
 
 (map!
   (:prefix "g"
@@ -246,6 +246,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:leader
   (:prefix "c"
     :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
+    :desc "Updates the ghci session" :n "u" #'update-ghci
    )
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
