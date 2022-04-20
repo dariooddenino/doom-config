@@ -93,8 +93,8 @@ _h_ decrease width    _l_ increase width
 
 (set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
 (after! psc-ide
-(set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
- )
+  (set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
+)
 
 (after! company
   (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
@@ -102,6 +102,8 @@ _h_ decrease width    _l_ increase width
   (setq company-show-numbers t)
   (setq company-idle-delay 0)
 )
+
+(after! lsp-lens (setq lsp-lens-place-position 'above-line))
 
 ;; === LSP CONFIG ===
 ; (with-eval-after-load 'lsp-mode
@@ -247,6 +249,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:prefix "c"
     :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
     :desc "Updates the ghci session" :n "u" #'update-ghci
+    :desc "Choose lsp lens" :n "." #'lsp-avy-lens
    )
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
