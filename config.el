@@ -91,14 +91,14 @@ _h_ decrease width    _l_ increase width
 
 (set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
 
-(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
-(after! psc-ide
-  (set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
-)
+;(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
+;(after! psc-ide
+;  (set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
+;)
 
 (after! company
-  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
-  (setq company-backends '(company-tabnine company-capf company-yasnippet))
+;  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
+;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
   (setq company-show-numbers t)
   (setq company-idle-delay 0)
 )
@@ -219,7 +219,7 @@ _h_ decrease width    _l_ increase width
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
+;;(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
 
 (defun append-line-comment-block ()
   "Appends a new line after a comment block without expanding it.
@@ -254,7 +254,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 	(:prefix "d"
 		 :desc "Flycheck buffer" :n "d" #'flycheck-buffer
      ;; temporary solution
-     :desc "Stylish buffer" :n "." #'haskell-mode-stylish-buffer
+    ;; :desc "Stylish buffer" :n "." #'haskell-mode-stylish-buffer
 		 :desc "Format buffer" :n "," #'format-all-buffer
 		 :desc "Comment line" :n "/" #'comment-line
 		 :desc "Comment region" :n ";" #'comment-region)
