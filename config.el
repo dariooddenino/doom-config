@@ -219,7 +219,10 @@ _h_ decrease width    _l_ increase width
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-;;(setq-hook! 'haskell-mode-hook +format-with 'stylish-haskell)
+
+;(setq-hook! 'haskell-mode-hook +format-with-lsp nil)
+; (setq-hook! 'haskell-mode-hook +format-with 'brittany)
+(after! lsp-haskell (setq lsp-haskell-formatting-provider "brittany"))
 
 (defun append-line-comment-block ()
   "Appends a new line after a comment block without expanding it.
