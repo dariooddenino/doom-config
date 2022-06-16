@@ -75,6 +75,7 @@ _h_ decrease width    _l_ increase width
 ;;(require 'load-nano)
 
 (add-to-list 'load-path "~/.config/doom")
+(require 'haskell-config)
 ;(require 'ghcid)
 
 ;; Packages
@@ -99,7 +100,7 @@ _h_ decrease width    _l_ increase width
 (after! company
 ;  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
 ;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
-  (setq company-show-numbers t)
+  (setq company-show-quick-access t)
   (setq company-idle-delay 0)
 )
 
@@ -198,6 +199,13 @@ _h_ decrease width    _l_ increase width
   (setq lsp-haskell-importlens-on nil)
  )
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (pushnew! tree-sitter-major-mode-language-alist '(haskell-mode . haskell))
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 ;(use-package! org-roam-server
 ; :config
 ;(setq org-roam-server-host "127.0.0.1"
@@ -238,12 +246,6 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
  )
 
-(defun update-ghci ()
-  "Updates the ghci session reloading the files and running DevelMain.update."
-  (interactive)
-  (+tmux "send-keys C-u :serve Enter")
-  )
-
 (map!
   (:prefix "g"
     :desc "New line after comment block" :n "o" #'append-line-comment-block
@@ -251,7 +253,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:leader
   (:prefix "c"
     :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
-    :desc "Updates the ghci session" :n "u" #'update-ghci
+    :desc "Updates the ghci session" :n "u" #'zellij-serve
     :desc "Choose lsp lens" :n "." #'lsp-avy-lens
    )
 	(:prefix "d"
