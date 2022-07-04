@@ -83,8 +83,8 @@ _h_ decrease width    _l_ increase width
 ; (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
 (add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
 
-(add-to-list '+lookup-provider-url-alist '("Pursuit" "https://pursuit.purescript.org/search?q=%s"))
-(add-to-list '+lookup-provider-url-alist '("Stackage" "https://www.stackage.org/lts-16.31/hoogle?q=%s"))
+;; (add-to-list '+lookup-provider-url-alist '("Pursuit" "https://pursuit.purescript.org/search?q=%s"))
+;; (add-to-list '+lookup-provider-url-alist '("Stackage" "https://www.stackage.org/lts-16.31/hoogle?q=%s"))
 
 (after! highlight-indent-guides
   (setq highlight-indent-guides-method 'bitmap)
@@ -103,6 +103,23 @@ _h_ decrease width    _l_ increase width
   (setq company-show-quick-access t)
   (setq company-idle-delay 0)
 )
+
+;; two below are for copilot
+(defun my-tab () 
+  (interactive)
+  (or (copilot-accept-completion)
+      (company-indent-or-complete-common nil)))
+
+(use-package! copilot
+ :hook (prog-mode . copilot-mode)
+ :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+        ("C-<tab>" . 'copilot-accept-completion-by-word)
+        :map company-active-map
+        ("<tab>" . 'my-tab)
+        ("TAB" . 'my-tab)
+        :map company-mode-map
+        ("<tab>" . 'my-tab)
+        ("TAB" . 'my-tab)))
 
 (after! lsp-lens (setq lsp-lens-place-position 'above-line))
 
