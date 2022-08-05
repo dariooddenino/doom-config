@@ -110,16 +110,16 @@ _h_ decrease width    _l_ increase width
   (or (copilot-accept-completion)
       (company-indent-or-complete-common nil)))
 
-(use-package! copilot
- :hook (prog-mode . copilot-mode)
- :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-        ("C-<tab>" . 'copilot-accept-completion-by-word)
-        :map company-active-map
-        ("<tab>" . 'my-tab)
-        ("TAB" . 'my-tab)
-        :map company-mode-map
-        ("<tab>" . 'my-tab)
-        ("TAB" . 'my-tab)))
+;(use-package! copilot
+; :hook (prog-mode . copilot-mode)
+; :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+;        ("C-<tab>" . 'copilot-accept-completion-by-word)
+;        :map company-active-map
+;        ("<tab>" . 'my-tab)
+;        ("TAB" . 'my-tab)
+;        :map company-mode-map
+;        ("<tab>" . 'my-tab)
+;        ("TAB" . 'my-tab)))
 
 (after! lsp-lens (setq lsp-lens-place-position 'above-line))
 
@@ -244,6 +244,10 @@ _h_ decrease width    _l_ increase width
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
+(after! lsp-ui 
+  (setq lsp-ui-sideline-diagnostic-max-lines 7)
+  (setq lsp-ui-sideline-show-diagnostics t)
+  )
 
 ;(setq-hook! 'haskell-mode-hook +format-with-lsp nil)
 ; (setq-hook! 'haskell-mode-hook +format-with 'brittany)
@@ -271,6 +275,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:prefix "c"
     :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
     :desc "Updates the ghci session" :n "u" #'zellij-serve
+    :desc "Runs test in ghci" :n "y" #'zellij-test
     :desc "Choose lsp lens" :n "." #'lsp-avy-lens
    )
 	(:prefix "d"

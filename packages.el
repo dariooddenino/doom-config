@@ -68,7 +68,7 @@
 ;(package! pest-mode)
 (package! direnv)
 (package! activity-watch-mode)
-;(package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
+; (package! company-tabnine :recipe (:host github :repo "TommyX12/company-tabnine"))
 (package! forge)
 ;(package! websocket)
 ;(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
@@ -76,4 +76,3 @@
 ;(package! websocket)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! copilot :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))

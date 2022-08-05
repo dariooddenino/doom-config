@@ -15,4 +15,10 @@
  (async-shell-command-no-window "zellij -s ONE action 'WriteChars: \":serve\\n\"'")
  )
 
+(defun zellij-test ()
+ "Updates the ghci session in zellij reloading the files and running tests."
+ (interactive)
+ (async-shell-command-no-window "zellij -s ONE action 'WriteChars: \":test\\n\"'")
+ )
+
 (provide 'haskell-config)
