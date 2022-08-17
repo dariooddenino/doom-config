@@ -26,7 +26,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-fairy-floss)
+(setq doom-theme 'doom-homage-black)
 ; doom-rouge
 ; doom-dark+
 ; manegarm
@@ -90,7 +90,8 @@ _h_ decrease width    _l_ increase width
   (setq highlight-indent-guides-method 'bitmap)
  )
 
-(set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
+(setq-hook! 'purescript-mode-hook +format-with 'purty)
+;; (set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
 
 ;(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
 ;(after! psc-ide
@@ -147,8 +148,8 @@ _h_ decrease width    _l_ increase width
   ; )
 
 (setq read-process-output-max (* 4 (* 1024 1024)))
-(setq lsp-idle-delay 0.200)
-(setq company-minimum-prefix-length 3)
+; (setq lsp-idle-delay 0.200)
+; (setq company-minimum-prefix-length 3)
 
 (after! eglot
 	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
@@ -264,6 +265,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 (after! company
   (define-key company-active-map (kbd "<return>") nil)
   (define-key company-active-map (kbd "RET") nil)
+  (define-key company-active-map (kbd "<tab>") #'company-complete-selection)
   (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
  )
 
