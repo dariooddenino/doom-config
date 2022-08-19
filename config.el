@@ -141,8 +141,28 @@ _h_ decrease width    _l_ increase width
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
 (add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
 
-(setq-hook! 'purescript-mode-hook +format-with 'purs-tidy)
-(set-formatter! 'purs-tidy "purs-tidy format") ; :modes '(purescript-mode))
+
+;(setq-hook! 'purescript-mode-hook +format-with 'purs-tidy)
+;(set-formatter! 'purs-tidy "purs-tidy format") ; :modes '(purescript-mode))
+(setq lsp-purescript-formatter "purs-tidy")
+
+(defun lsp-purescript-build ()
+ "Triggers a Purescript LSP build."
+ (interactive)
+  (unwind-protect
+   (progn
+    (lsp-request-async
+      "workspace/executeCommand"
+      (list :command "purescript.build")
+      (lambda (res) (message "Purescript LSP build done."))
+      :error-handler (lambda (err) 
+        (cond
+          ((lsp-json-error? err) (error (lsp:json-error-message err)))
+          ((lsp-json-error? (cl-first err))
+            (error (lsp:json-error-message (cl-first err))))))))))
+
+(after! purescript-mode
+ (add-hook 'after-save-hook #'lsp-purescript-build))
 
 ;(after! eglot
 ;	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
@@ -206,6 +226,7 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (call-interactively 'evil-append-line)
   (call-interactively '+default/newline)
   )
+
 
 (after! company
   (define-key company-active-map (kbd "<return>") nil)

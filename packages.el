@@ -48,6 +48,7 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+(package! lsp-mode :pin "37c2adffc270f0fdf02f6bf203ce150b5a114fde")
 (package! evil-magit)
 (package! shakespeare-mode)
 ; (package! protobuf-mode)
