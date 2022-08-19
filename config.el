@@ -2,59 +2,6 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Dario Oddenino"
-      user-mail-address "branch13@gmail.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Iosevka" :size 15))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-homage-black)
-; doom-rouge
-; doom-dark+
-; manegarm
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-;; Add closed timestamp to org todos
-(setq org-log-done t)
-
-(defhydra doom-window-resize-hydra (:hint nil)
-  "
-             _k_ increase height
-_h_ decrease width    _l_ increase width
-             _j_ decrease height
-"
-  ("h" evil-window-decrease-width)
-  ("j" evil-window-increase-height)
-  ("k" evil-window-decrease-height)
-  ("l" evil-window-increase-width)
-
-  ("q" nil))
-
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -71,94 +18,140 @@ _h_ decrease width    _l_ increase width
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;;(add-to-list 'load-path "~/.config/doom")
-;;(require 'load-nano)
+
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets.
+(setq user-full-name "Dario Oddenino"
+      user-mail-address "branch13@gmail.com")
+
+
+;;
+;; General config
+(setq read-process-output-max (* 4 (* 1024 1024)))
+(global-activity-watch-mode)
+
+;;
+;;; UI
+
+;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
+;; are the three important ones:
+;;
+;; + `doom-font'
+;; + `doom-variable-pitch-font'
+;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;;
+;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+;; font string. You generally only need these two:
+;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "Iosevka" :size 15))
+(setq doom-theme 'doom-homage-black)
+
+;; Line numbers are slow
+(setq display-line-numbers nil)
+
+;; Prevents some cases of Emacs flickering
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+
+;;
+;;; Modules
+
+;;; :completion company
+;; Set manual completion trigger
+(after! company
+ (setq company-show-quick-access t
+       company-idle-delay nil))
+
+;;; :ui modeline
+;; An evil mode indicator is redudant with cursor shape
+(advice-add #'doom-modeline-segment--modals :override #'ignore)
+
+;;; :editor evil
+;; Focus new window on splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
+;; Implicit /g flag on evil ex substitution
+(setq evil-ex-substitute-global t)
+
+;;; :tools lsp
+;; Disable invasive lsp-mode features
+(after! lsp-mode
+ (setq lsp-enable-symbol-highlighting nil))
+(after! lsp-ui
+ (setq lsp-ui-sideline-enable nil ;; flycheck
+       lsp-ui-doc-enable nil)) ;; use K
+
+;(after! lsp-lens (setq lsp-lens-place-position 'above-line))
+
+
+;;; :lang org
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+
+
+;;; :ui doom-dashboard
+(setq fancy-splash-image (concat doom-private-dir "splash.png"))
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
+
+;;; :ui hydra
+(defhydra doom-window-resize-hydra (:hint nil)
+  "
+             _k_ increase height
+_h_ decrease width    _l_ increase width
+             _j_ decrease height
+"
+  ("h" evil-window-decrease-width)
+  ("j" evil-window-increase-height)
+  ("k" evil-window-decrease-height)
+  ("l" evil-window-increase-width)
+
+  ("q" nil))
+
+
+;;; :ui indent-guides
+(after! highlight-indent-guides
+  (setq highlight-indent-guides-method 'bitmap)
+ )
+
+
+;;
+;;; Additional files
 
 (add-to-list 'load-path "~/.config/doom")
 (require 'haskell-config)
 ;(require 'ghcid)
 
-;; Packages
+;;
+;;; Extra packages
+(use-package! direnv
+	      :config (direnv-mode))
+(use-package! forge
+  :after magit)
+(use-package! svelte-mode :mode "\\.svelte"
+	      :hook #'lsp)
+
+;;
+;;; Language customizations
+
 (add-hook! 'haskell-mode-hook #'flycheck-haskell-setup)
-; (add-to-list 'evil-emacs-state-modes 'font-lock-studio-mode)
 (add-hook! 'prog-mode-hook 'highlight-indent-guides-mode)
 
-;; (add-to-list '+lookup-provider-url-alist '("Pursuit" "https://pursuit.purescript.org/search?q=%s"))
-;; (add-to-list '+lookup-provider-url-alist '("Stackage" "https://www.stackage.org/lts-16.31/hoogle?q=%s"))
+(setq-hook! 'purescript-mode-hook +format-with 'purs-tidy)
+(set-formatter! 'purs-tidy "purs-tidy format") ; :modes '(purescript-mode))
 
-(after! highlight-indent-guides
-  (setq highlight-indent-guides-method 'bitmap)
- )
-
-(setq-hook! 'purescript-mode-hook +format-with 'purty)
-;; (set-formatter! 'purs-tidy "purs-tidy format" :modes '(purescript-mode))
-
-;(set-company-backend! 'purescript-mode-hook '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
-;(after! psc-ide
-;  (set-company-backend! 'purescript-mode '(company-tabnine :separate company-psc-ide-backend company-capf company-yasnippet))
-;)
-
-(after! company
-;  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
-;  (setq company-backends '(company-tabnine company-capf company-yasnippet))
-  (setq company-show-quick-access t)
-  (setq company-idle-delay 0)
-)
-
-;; two below are for copilot
-(defun my-tab () 
-  (interactive)
-  (or (copilot-accept-completion)
-      (company-indent-or-complete-common nil)))
-
-;(use-package! copilot
-; :hook (prog-mode . copilot-mode)
-; :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-;        ("C-<tab>" . 'copilot-accept-completion-by-word)
-;        :map company-active-map
-;        ("<tab>" . 'my-tab)
-;        ("TAB" . 'my-tab)
-;        :map company-mode-map
-;        ("<tab>" . 'my-tab)
-;        ("TAB" . 'my-tab)))
-
-(after! lsp-lens (setq lsp-lens-place-position 'above-line))
-
-;; === LSP CONFIG ===
-; (with-eval-after-load 'lsp-mode
-  ;; no real time syntax check 
-  ; (setq lsp-diagnostic-package :none)
-  ;; handle yasnippet by myself
-  ; (setq lsp-enable-snippet nil)
-  ;; use `company-ctags' only.
-  ;; Please note `company-lsp' is automatically enabled if installed
-  ; (setq lsp-enable-completion-at-point nil)
-  ;; turn off for better performance
-  ; (setq lsp-enable-symbol-highlighting nil)
-  ; (setq lsp-enable-links nil)
-
-  ;; don't ping LSP language server too frequently
-  ; (defvar lsp-on-touch-time 0)
-  ; (defadvice lsp-on-change (around lsp-on-change-hack activate)
-  ;  ;; dont' run `lsp-on-change' too frequently
-  ;  (when (> (- (float-time (current-time))
-  ;            lsp-on-touch-time) 30) ;; 30 seconds
-  ;   (setq lsp-on-touch-time (float-time (current-time)))
-  ;   ad-do-it))
-  ; )
-
-(setq read-process-output-max (* 4 (* 1024 1024)))
-; (setq lsp-idle-delay 0.200)
-; (setq company-minimum-prefix-length 3)
-
-(after! eglot
-	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
-	(add-hook 'php-mode-hook 'eglot-ensure)
-	(advice-add 'eglot-eldoc-function :around
-		    (lambda (oldfun)
-		      (let ((help (help-at-pt-kbd-string)))
-			(if help (message "%s" help) (funcall oldfun)))))
-	)
+;(after! eglot
+;	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
+;	(add-hook 'php-mode-hook 'eglot-ensure)
+;	(advice-add 'eglot-eldoc-function :around
+;		    (lambda (oldfun)
+;		      (let ((help (help-at-pt-kbd-string)))
+;			(if help (message "%s" help) (funcall oldfun)))))
+;	)
 
 (after! css-mode
 	(setq css-indent-offset 2)
@@ -166,29 +159,6 @@ _h_ decrease width    _l_ increase width
 
 (after! keychain-environment
 	(keychain-refresh-environment))
-
-(use-package! svelte-mode :mode "\\.svelte"
-	      :hook #'lsp)
-
-;; (setq nimsuggest-path "/home/dario/.nimble/bin/nimsuggest")
-
-
-(use-package! dhall-mode
-	      :mode "\\.dhall")
-
-;(setq auth-sources '("~/.authinfo.gpg"))
-(use-package! forge
-  :after magit)
-
-;(use-package! pest-mode
-;        :mode "\\.pest\\'"
-;        :hook (pest-mode . flymake-mode)
-; )
-
-(use-package! direnv
-	      :config (direnv-mode))
-
-(global-activity-watch-mode)
 
 (after! lsp-mode
 (dolist (dir '(
@@ -217,42 +187,17 @@ _h_ decrease width    _l_ increase width
   (setq lsp-haskell-importlens-on nil)
  )
 
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (pushnew! tree-sitter-major-mode-language-alist '(haskell-mode . haskell))
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-;(use-package! org-roam-server
-; :config
-;(setq org-roam-server-host "127.0.0.1"
-;        org-roam-server-port 8088
-;        org-roam-server-authenticate nil
-;        org-roam-server-export-inline-images t
-;        org-roam-server-serve-files nil
-;        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-;        org-roam-server-network-poll t
-;        org-roam-server-network-arrows nil
-;        org-roam-server-network-label-truncate t
-;        org-roam-server-network-label-truncate-length 60
-;        org-roam-server-network-label-wrap-length 20))
-
 (setq haskell-process-type 'cabal-new-repl)
 
-(setq read-process-output-max (* 1024 1024))
 
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode)
 
-(after! lsp-ui 
-  (setq lsp-ui-sideline-diagnostic-max-lines 7)
-  (setq lsp-ui-sideline-show-diagnostics t)
-  )
-
-;(setq-hook! 'haskell-mode-hook +format-with-lsp nil)
-; (setq-hook! 'haskell-mode-hook +format-with 'brittany)
 (after! lsp-haskell (setq lsp-haskell-formatting-provider "brittany"))
+
+
+;;
+;;; Keybindings
 
 (defun append-line-comment-block ()
   "Appends a new line after a comment block without expanding it.
