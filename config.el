@@ -161,8 +161,8 @@ _h_ decrease width    _l_ increase width
           ((lsp-json-error? (cl-first err))
             (error (lsp:json-error-message (cl-first err))))))))))
 
-(after! purescript-mode
- (add-hook 'after-save-hook #'lsp-purescript-build))
+;; (after! purescript-mode
+;;  (add-hook 'after-save-hook #'lsp-purescript-build))
 
 ;(after! eglot
 ;	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
@@ -235,6 +235,16 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
  )
 
+(after! purescript-mode
+  (map! :map purescript-mode-map
+        (:leader 
+         (:prefix "c" :desc "Rebuild purescript bundle" :n "u" #'lsp-purescript-build))))
+
+(after! haskell-mode
+  (map! :map haskell-mode-map 
+        (:leader (:prefix "c" :desc "Updates the ghci session" :n "u" #'zellij-serve
+                              :desc "Runs tests in ghci" :n "y" #'zellij-test))))
+
 (map!
   (:prefix "g"
     :desc "New line after comment block" :n "o" #'append-line-comment-block
@@ -242,8 +252,6 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (:leader
   (:prefix "c"
     :desc "Search symbols defined in current file" :n "/" #'consult-lsp-file-symbols
-    :desc "Updates the ghci session" :n "u" #'zellij-serve
-    :desc "Runs test in ghci" :n "y" #'zellij-test
     :desc "Choose lsp lens" :n "." #'lsp-avy-lens
    )
 	(:prefix "d"
