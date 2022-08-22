@@ -235,15 +235,15 @@ Calls `evil-append-line` and `+default/newline` in sequence."
   (define-key company-active-map (kbd "C-SPC") #'company-complete-selection)
  )
 
-(after! purescript-mode
+(after! purescript
   (map! :map purescript-mode-map
-        (:leader 
-         (:prefix "c" :desc "Rebuild purescript bundle" :n "u" #'lsp-purescript-build))))
+        (:localleader 
+         (:desc "Rebuild purescript bundle" :n "u" #'lsp-purescript-build))))
 
-(after! haskell-mode
+(after! haskell
   (map! :map haskell-mode-map 
-        (:leader (:prefix "c" :desc "Updates the ghci session" :n "u" #'zellij-serve
-                              :desc "Runs tests in ghci" :n "y" #'zellij-test))))
+        (:localleader (:desc "Updates the ghci session" :n "u" #'zellij-serve
+                       :desc "Runs tests in ghci" :n "y" #'zellij-test))))
 
 (map!
   (:prefix "g"
