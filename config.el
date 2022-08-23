@@ -200,7 +200,7 @@ _h_ decrease width    _l_ increase width
 (after! js2-mode
   (setq js2-basic-offset 2))
 
-(after! haskell-mode
+(after! haskell
   (setq lsp-haskell-importlens-on nil)
  )
 
