@@ -161,9 +161,6 @@ _h_ decrease width    _l_ increase width
           ((lsp-json-error? (cl-first err))
             (error (lsp:json-error-message (cl-first err))))))))))
 
-;; (after! purescript-mode
-;;  (add-hook 'after-save-hook #'lsp-purescript-build))
-
 ;(after! eglot
 ;	(add-to-list 'eglot-server-programs '(php-mode . ("php" "vendor/bin/psalm-language-server")))
 ;	(add-hook 'php-mode-hook 'eglot-ensure)
