@@ -146,12 +146,6 @@ _h_ decrease width    _l_ increase width
 ;(set-formatter! 'purs-tidy "purs-tidy format") ; :modes '(purescript-mode))
 (setq lsp-purescript-formatter "purs-tidy")
 
-
-(after! purescript-mode
- (setq lsp-purescript-server-executable "node")
- (setq lsp-purescript-server-args '("/home/dario/dev/vendor/purescript-language-server/bundle.js" "--stdio" "--log" "/home/dario/foo.txt"))
- )
-
 (defun lsp-purescript-build ()
  "Triggers a Purescript LSP build."
  (interactive)
