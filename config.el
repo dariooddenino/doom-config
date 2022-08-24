@@ -240,7 +240,14 @@ Calls `evil-append-line` and `+default/newline` in sequence."
 (after! haskell
   (map! :map haskell-mode-map 
         (:localleader (:desc "Updates the ghci session" :n "b" #'zellij-serve
-                       :desc "Runs tests in ghci" :n "t" #'zellij-test))))
+                       :desc "Runs tests in ghci" :n "t" #'zellij-test)))
+  )
+
+(after! shakespeare-mode
+ (map! :map shakespeare-mode-map
+        (:localleader (:desc "Updates the ghci session" :n "b" #'zellij-serve
+                       :desc "Runs tests in ghci" :n "t" #'zellij-test)))
+  )
 
 (map!
   (:prefix "g"
