@@ -11,6 +11,8 @@
 ;; Created: 26 Sep 2014
 ;; Keywords: tools, files, Haskell
 
+;; not sure of how much of this is still used
+
 ;;; Commentary:
 
 ;; Use M-x ghcid to launch
